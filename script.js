@@ -25,6 +25,7 @@ function createTask(){
         li.appendChild(delIcon);
 
         inputBox.value = '';
+        saveData();
     }
 }
 
@@ -33,8 +34,20 @@ taskContainer.addEventListener('click',handleCheckAndDeletion);
 function handleCheckAndDeletion(e){
     if(e.target.tagName==='LI'){
         e.target.classList.toggle("checked");
+        saveData();
     }
     else if(e.target.tagName==='IMG'){
         e.target.parentElement.remove();
+        saveData();
     }
 }
+
+// function to save data
+function saveData(){
+    localStorage.setItem("data", taskContainer.innerHTML);
+}
+// function to show data
+function showData(){
+   taskContainer.innerHTML = localStorage.getItem("data");
+}
+showData();
